@@ -1,48 +1,58 @@
 # CorporationX
 
-Репозиторий для всего проекта. Использует git submodule, чтобы включить все остальные сервисы
+Это проект над которым я работал вместе со своей командой из 8 человек. Писали проект на микросервисной архитектуре. Т.к. над проектом работали разные команды, то для изучения всего кода моей команды необходимо смотреть сервисы в ветке kraken-master-stream6. Фичи реализованные мной будут указаны ниже.
 
-# Как начать работу?
+# My features
 
-`git clone --recurse-submodules https://github.com/CorporationX/CorporationX`
+## 1. Создание и настройка скилов пользователя
+SkillHub позволяет пользователям добавлять, настраивать и делиться своими навыками с другими. Это помогает раскрыть потенциал, рассказать о своих умениях и расширить возможности для сотрудничества. Проект включает:
+-	Создание навыков: уникальные навыки добавляются в базу и становятся доступными всем пользователям.
+-	Управление навыками: просматривай список своих навыков и получай рекомендации от других пользователей.
+-	Приобретение предложенных навыков: если навык рекомендован минимум 3 пользователями, он может быть добавлен в ваш профиль.
+-	https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/main/java/school/faang/user_service/controller/SkillController.java
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/main/java/school/faang/user_service/mapper/SkillMapper.java
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/main/java/school/faang/user_service/service/SkillService.java
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/test/java/school/faang/user_service/service/SkillServiceTest.java
 
-# Как поднять БД и другие инструменты локально?
+## 2. Внедрение CI pipeline для user_service
+В рамках задачи настроен CI-пайплайн для репозитория user_service с использованием GitHub Actions. CI предоставляет автоматизированные процессы для тестирования кода при каждом пулл-реквесте, что обеспечивает стабильность и качество разработки. 
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26837/.github/workflows/ci.yml
 
-Следуем инструкциям в README в разделе `infra`. Это отдельный репозиторий, который содержит в себе все инфраструктурные компоненты (БД, Redis, Docker Compose и пр.)
+## 3. Добавление системы альбомов постов
+PostAlbum добавляет возможность пользователям организовывать посты в альбомы для упрощения работы с контентом и тематических подборок. Основной функционал:
+-	Создание альбомов: пользователи могут создавать альбомы с уникальными для них названиями и описаниями.
+-	Добавление и удаление постов: пользователи управляют содержимым своих альбомов, добавляя или удаляя посты.
+-	Избранные альбомы: пользователи могут добавлять альбомы в избранные для быстрого доступа.
+-	Фильтрация и поиск: расширенные возможности фильтрации и поиска по собственным или всем альбомам в системе.
+-	Редактирование и удаление: возможность обновления информации об альбоме или удаления ненужных.
 
-# Как вести разработку?
+  Система позволяет эффективно управлять контентом, упрощает поиск и организацию постов, а также улучшает пользовательский опыт благодаря гибкому функционалу.
+- https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/controller/AlbumController.java
+- https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/model/Album.java
+- https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/repository/PostRepository.java
+- https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/service/AlbumService.java
 
-Каждая папка в этом репозитории - это отдельный подрепозиторий, который тоже есть на GitHub. Т.е. user_service - это обычный Git-репозиторий, который попросту включен в большой репозиторий CorporationX в качестве подрепозитория. 
+## 4. Добавление аватара пользователя 
+Разработал функционал управления аватарами пользователей с использованием Minio и Amazon S3 API. Реализовал загрузку с валидацией размера файла (до 5 Мб), автоматическую обработку изображений для создания двух версий (1080 px и 170 px), сохранение данных в PostgreSQL через embedded entity, а также безопасное удаление аватаров из хранилища и базы. Обеспечил отказоустойчивость и оптимизацию работы с графикой.
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/java/school/faang/user_service/service/user/UserService.java
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/java/school/faang/user_service/service/s3/S3ServiceImpl.java
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/java/school/faang/user_service/service/s3/UploadAvatarToS3.java
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/resources/application.yaml
 
-CorporationX репозиторий существует лишь для удобства: можно сразу склонировать все необходимые сервисы всего одной командой `git clone`, которая указана выше.
+## 5. Публикация постов по расписанию
+Реализовал функционал планирования и автоматической публикации постов. Добавил возможность указывать дату и время публикации через поле scheduledAt в PostDto. Настроил регулярный запуск публикации запланированных постов с использованием Spring Scheduler. Разработал многопоточный механизм публикации с помощью пула потоков, что позволяет обрабатывать большое количество постов параллельно, минимизируя задержки. Обновил логику PostService для управления статусами публикации, интегрировал с PostRepository для оптимальной работы с базой данных. Написал unit-тесты для проверки корректности работы всех компонентов.
+- https://github.com/CorporationX/post_service/blob/feature-BJS2-26895/src/main/java/faang/school/postservice/scheduled/ScheduledPostPublisher.java
 
-Каждый подрепозиторий представляет собой отдельный сервис (Java-приложение) в экосистеме CorporationX. Например, user_service - это приложение, которое содержит в себе логику работы с пользователями, project_service - логику работы с проектами и т.д. 
-Соответственно в зависимости от конкретной задачи вы будете работать либо в том, либо в другом сервисе. По сути просто писать там код, как в обычном проекте в IDEA.
+## 6. Уведомление о подписке
+Реализовал функционал отправки и обработки уведомлений о подписке между пользователями. Настроил взаимодействие между сервисами через Redis Pub/Sub. В user_service создал отправитель событий FollowerEventPublisher, который публикует данные о подписке, включая идентификаторы подписчика и пользователя, на которого подписались. В notification_service разработал обработчик событий FollowerEventListener, который слушает события из Redis и отправляет уведомления пользователям. Настроил генерацию сообщений с помощью MessageBuilder, обеспечив кастомизацию содержания уведомлений через конфигурацию messages.yaml. Обеспечил интеграцию всех компонентов с учетом предпочтений пользователей по способу получения уведомлений.
+- https://github.com/CorporationX/notification_service/blob/feature-BJS2-26949/src/main/java/faang/school/notificationservice/publis/listener/follower/FollowerEventListener.java
+- https://github.com/CorporationX/notification_service/blob/feature-BJS2-26949/src/main/java/faang/school/notificationservice/config/redis/RedisConfig.java
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26949/src/main/java/school/faang/user_service/publis/aspect/FollowerEventAspect.java
+- https://github.com/CorporationX/user_service/blob/feature-BJS2-26949/src/main/java/school/faang/user_service/publis/publisher/FollowerEventPublisher.java
 
-Поэтому:
-1. Выкачиваем весь проект CorporationX, используя команду клонирования выше
-2. Из конкретной задачи в Jira определяем, в каком сервисе нужно вести разработку.
-3. Открываем в IDEA папку с этим сервисом
-4. Работаемс!
+## 7. Отправка сообщений в Telegram
+Реализовал интеграцию с Telegram для отправки нотификаций через собственного Telegram-бота. Настроил TelegramService, который отвечает за отправку сообщений пользователям. Бот создан и зарегистрирован с использованием официального API Telegram, а конфигурация для взаимодействия с ботом добавлена в application.yaml. TelegramService интегрирован в notification_service и реализует интерфейс NotificationService, обрабатывая входящие сообщения и отправляя их пользователям в соответствии с их Telegram ID. Обеспечено покрытие функционала unit-тестами для гарантии стабильности и корректности работы.
+- https://github.com/CorporationX/notification_service/blob/feature-BJS2-26950/src/main/java/faang/school/notificationservice/service/TelegramBotService.java
+- https://github.com/CorporationX/notification_service/blob/feature-BJS2-26950/src/main/java/faang/school/notificationservice/NotificationServiceApp.java
 
-# Как создавать PR?
-
-Каждая команда будет иметь свою собственную master ветку в общем репозитории. Например, команда unicorn имеет ветку `master-unicorn`, которая содержит весь стабильный код этой команды в определенном сервисе, и именно туда участники должны создавать PR-ы.
-
-Поэтому:
-
-1. Получаем задачу в Jira
-2. Определяем, в каком сервисе будем вести разработку
-3. Открываем этот сервис в IDEA
-4. Переключаемся на `master`-ветку СВОЕЙ команды. ЭТО ОЧЕНЬ ВАЖНО. Если вы только начинаете разработку новой задачи, то убедитесь, что переключились на ветку `master-unicorn` или `master-kraken` в зависимости от вашей команды, перед тем, как создать еще одну ветку.
-5. Из данной ветки создаем ветку для вашей конкретной задачи по шаблону: `feature-{номер_задачи}` или `bugfix-{номер_задачи}` в зависимости от того, делаете ли вы новую фичу или чините некоторый баг.
-6. Именно в этой ветке ведем всю разработку
-7. Когда разработка завершена создаем PR из этой ветки в master-ветку вашей команды, из которой изначально и создавали рабочую ветку. Убедитесь, что всегда создаете PR в правильную ветку именно для вашей команды.
-8. Получам аппрув от техлида.
-9. Мержируемся!
-
-# Тесты
-
-Каждый PR в этом репозитории обязан содержать unit-тесты на всю вашу логику. PR-ы без unit-тестов будут отправлятся сразу обратно в работу без частичной проверки. Когда команда добавит CI пайплайны на GitHub, то PR-ы с упавшими тестами, будут также сразу отправляться обратно в работу без частичной проверки. 
-
-Ваш PR должен быть полностью зеленым и покрыт тестами, чтобы получить ревью. Это обязательное требование.
+## 8. Создание новостной ленты
