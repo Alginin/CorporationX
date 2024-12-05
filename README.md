@@ -9,14 +9,14 @@ SkillHub позволяет пользователям добавлять, на�
 -	Создание навыков: уникальные навыки добавляются в базу и становятся доступными всем пользователям.
 -	Управление навыками: просматривай список своих навыков и получай рекомендации от других пользователей.
 -	Приобретение предложенных навыков: если навык рекомендован минимум 3 пользователями, он может быть добавлен в ваш профиль.
--	https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/main/java/school/faang/user_service/controller/SkillController.java
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/main/java/school/faang/user_service/mapper/SkillMapper.java
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/main/java/school/faang/user_service/service/SkillService.java
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/test/java/school/faang/user_service/service/SkillServiceTest.java
+-	[SkillController.java](https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/main/java/school/faang/user_service/controller/SkillController.java)
+- [SkillMapper.java](https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/main/java/school/faang/user_service/mapper/SkillMapper.java)
+- [SkillService.java](https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/main/java/school/faang/user_service/service/SkillService.java)
+- [SkillServiceTest.java](https://github.com/CorporationX/user_service/blob/feature-BJS2-26808/src/test/java/school/faang/user_service/service/SkillServiceTest.java)
 
 ## 2. Внедрение CI pipeline для user_service
 В рамках задачи настроен CI-пайплайн для репозитория user_service с использованием GitHub Actions. CI предоставляет автоматизированные процессы для тестирования кода при каждом пулл-реквесте, что обеспечивает стабильность и качество разработки. 
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26837/.github/workflows/ci.yml
+- [ci.yml](https://github.com/CorporationX/user_service/blob/feature-BJS2-26837/.github/workflows/ci.yml)
 
 ## 3. Добавление системы альбомов постов
 PostAlbum добавляет возможность пользователям организовывать посты в альбомы для упрощения работы с контентом и тематических подборок. Основной функционал:
@@ -27,32 +27,32 @@ PostAlbum добавляет возможность пользователям �
 -	Редактирование и удаление: возможность обновления информации об альбоме или удаления ненужных.
 
   Система позволяет эффективно управлять контентом, упрощает поиск и организацию постов, а также улучшает пользовательский опыт благодаря гибкому функционалу.
-- https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/controller/AlbumController.java
-- https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/model/Album.java
-- https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/repository/PostRepository.java
-- https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/service/AlbumService.java
+- [AlbumController.java](https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/controller/AlbumController.java)
+- [Album.java](https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/model/Album.java)
+- [PostRepository.java](https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/repository/PostRepository.java)
+- [AlbumService.java](https://github.com/CorporationX/post_service/blob/feature-BJS2-26856/src/main/java/faang/school/postservice/service/AlbumService.java)
 
 ## 4. Добавление аватара пользователя 
 Разработал функционал управления аватарами пользователей с использованием Minio и Amazon S3 API. Реализовал загрузку с валидацией размера файла (до 5 Мб), автоматическую обработку изображений для создания двух версий (1080 px и 170 px), сохранение данных в PostgreSQL через embedded entity, а также безопасное удаление аватаров из хранилища и базы. Обеспечил отказоустойчивость и оптимизацию работы с графикой.
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/java/school/faang/user_service/service/user/UserService.java
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/java/school/faang/user_service/service/s3/S3ServiceImpl.java
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/java/school/faang/user_service/service/s3/UploadAvatarToS3.java
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/resources/application.yaml
+- [UserService.java](https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/java/school/faang/user_service/service/user/UserService.java)
+- [S3ServiceImpl.java](https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/java/school/faang/user_service/service/s3/S3ServiceImpl.java)
+- [UploadAvatarToS3.java](https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/java/school/faang/user_service/service/s3/UploadAvatarToS3.java)
+- [application.yaml](https://github.com/CorporationX/user_service/blob/feature-BJS2-26872/src/main/resources/application.yaml)
 
 ## 5. Публикация постов по расписанию
 Реализовал функционал планирования и автоматической публикации постов. Добавил возможность указывать дату и время публикации через поле scheduledAt в PostDto. Настроил регулярный запуск публикации запланированных постов с использованием Spring Scheduler. Разработал многопоточный механизм публикации с помощью пула потоков, что позволяет обрабатывать большое количество постов параллельно, минимизируя задержки. Обновил логику PostService для управления статусами публикации, интегрировал с PostRepository для оптимальной работы с базой данных. Написал unit-тесты для проверки корректности работы всех компонентов.
-- https://github.com/CorporationX/post_service/blob/feature-BJS2-26895/src/main/java/faang/school/postservice/scheduled/ScheduledPostPublisher.java
+- [ScheduledPostPublisher.java](https://github.com/CorporationX/post_service/blob/feature-BJS2-26895/src/main/java/faang/school/postservice/scheduled/ScheduledPostPublisher.java)
 
 ## 6. Уведомление о подписке
 Реализовал функционал отправки и обработки уведомлений о подписке между пользователями. Настроил взаимодействие между сервисами через Redis Pub/Sub. В user_service создал отправитель событий FollowerEventPublisher, который публикует данные о подписке, включая идентификаторы подписчика и пользователя, на которого подписались. В notification_service разработал обработчик событий FollowerEventListener, который слушает события из Redis и отправляет уведомления пользователям. Настроил генерацию сообщений с помощью MessageBuilder, обеспечив кастомизацию содержания уведомлений через конфигурацию messages.yaml. Обеспечил интеграцию всех компонентов с учетом предпочтений пользователей по способу получения уведомлений.
-- https://github.com/CorporationX/notification_service/blob/feature-BJS2-26949/src/main/java/faang/school/notificationservice/publis/listener/follower/FollowerEventListener.java
-- https://github.com/CorporationX/notification_service/blob/feature-BJS2-26949/src/main/java/faang/school/notificationservice/config/redis/RedisConfig.java
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26949/src/main/java/school/faang/user_service/publis/aspect/FollowerEventAspect.java
-- https://github.com/CorporationX/user_service/blob/feature-BJS2-26949/src/main/java/school/faang/user_service/publis/publisher/FollowerEventPublisher.java
+- [FollowerEventListener.java](https://github.com/CorporationX/notification_service/blob/feature-BJS2-26949/src/main/java/faang/school/notificationservice/publis/listener/follower/FollowerEventListener.java)
+- [RedisConfig.java](https://github.com/CorporationX/notification_service/blob/feature-BJS2-26949/src/main/java/faang/school/notificationservice/config/redis/RedisConfig.java)
+- [FollowerEventAspect.java](https://github.com/CorporationX/user_service/blob/feature-BJS2-26949/src/main/java/school/faang/user_service/publis/aspect/FollowerEventAspect.java)
+- [FollowerEventPublisher.java](https://github.com/CorporationX/user_service/blob/feature-BJS2-26949/src/main/java/school/faang/user_service/publis/publisher/FollowerEventPublisher.java)
 
 ## 7. Отправка сообщений в Telegram
 Реализовал интеграцию с Telegram для отправки нотификаций через собственного Telegram-бота. Настроил TelegramService, который отвечает за отправку сообщений пользователям. Бот создан и зарегистрирован с использованием официального API Telegram, а конфигурация для взаимодействия с ботом добавлена в application.yaml. TelegramService интегрирован в notification_service и реализует интерфейс NotificationService, обрабатывая входящие сообщения и отправляя их пользователям в соответствии с их Telegram ID. Обеспечено покрытие функционала unit-тестами для гарантии стабильности и корректности работы.
-- https://github.com/CorporationX/notification_service/blob/feature-BJS2-26950/src/main/java/faang/school/notificationservice/service/TelegramBotService.java
-- https://github.com/CorporationX/notification_service/blob/feature-BJS2-26950/src/main/java/faang/school/notificationservice/NotificationServiceApp.java
+- [TelegramBotService.java](https://github.com/CorporationX/notification_service/blob/feature-BJS2-26950/src/main/java/faang/school/notificationservice/service/TelegramBotService.java)
+- [NotificationServiceApp.java](https://github.com/CorporationX/notification_service/blob/feature-BJS2-26950/src/main/java/faang/school/notificationservice/NotificationServiceApp.java)
 
 ## 8. Создание новостной ленты
