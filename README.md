@@ -56,3 +56,18 @@ PostAlbum добавляет возможность пользователям �
 - [NotificationServiceApp.java](https://github.com/CorporationX/notification_service/blob/feature-BJS2-26950/src/main/java/faang/school/notificationservice/NotificationServiceApp.java)
 
 ## 8. Создание новостной ленты
+Реализация killer-feature News Fead News Feed - фича которая включает в себя формирования ленты новостей, для каждого пользователя
+
+Формирование ленты постов в Redis: Лента постов каждого пользователя должна сохраняться в кэше Redis для быстрого доступа и повышения производительности.
+
+Обработка конкурентного доступа: Использование Optimistic Lock для управления конкурентным доступом к данным в Redis и предотвращения коллизий при обновлении.
+
+Интеграция с Kafka: Подключение к Kafka для обработки событий (публикация постов, комментарии, просмотры, лайки) и формирования ленты на основе этих данных.
+
+Разогреватель фида: Реализация механизма предварительной генерации ленты (news feed) для всех пользователей при первом запуске приложения.
+
+Эндпоинты для получения постов: Создание API для получения пачек постов из пользовательской ленты, соответствующих текущему состоянию news feed.
+- [AbstractKafkaProducer.java](https://github.com/CorporationX/post_service/blob/news-feed-team2-developer/src/main/java/faang/school/postservice/producer/AbstractKafkaProducer.java) | [KafkaPostProducer.java](https://github.com/CorporationX/post_service/blob/news-feed-team2-developer/src/main/java/faang/school/postservice/producer/KafkaPostProducer.java)
+- [KafkaPostPublishConsumer.java](https://github.com/CorporationX/post_service/blob/news-feed-team2-developer/src/main/java/faang/school/postservice/listener/KafkaPostPublishConsumer.java)
+- [NewsFeedRedisRepository.java](https://github.com/CorporationX/post_service/blob/news-feed-team2-developer/src/main/java/faang/school/postservice/repository/NewsFeedRedisRepository.java)  
+- [NewsFeedController.java](https://github.com/CorporationX/post_service/blob/news-feed-team2-developer/src/main/java/faang/school/postservice/controller/NewsFeedController.java) | [NewsFeedService.java](https://github.com/CorporationX/post_service/blob/news-feed-team2-developer/src/main/java/faang/school/postservice/service/NewsFeedService.java)
