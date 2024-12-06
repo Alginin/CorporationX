@@ -55,7 +55,7 @@ PostAlbum добавляет возможность пользователям �
 - [TelegramBotService.java](https://github.com/CorporationX/notification_service/blob/feature-BJS2-26950/src/main/java/faang/school/notificationservice/service/TelegramBotService.java)
 - [NotificationServiceApp.java](https://github.com/CorporationX/notification_service/blob/feature-BJS2-26950/src/main/java/faang/school/notificationservice/NotificationServiceApp.java)
 
-## 8. Создание новостной ленты
+## 8. News Feed
 Реализация killer-feature News Fead News Feed - фича которая включает в себя формирования ленты новостей, для каждого пользователя
 
 Формирование ленты постов в Redis: Лента постов каждого пользователя должна сохраняться в кэше Redis для быстрого доступа и повышения производительности.
